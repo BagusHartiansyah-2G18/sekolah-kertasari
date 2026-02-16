@@ -1,0 +1,103 @@
+{% extends 'baseHome.html' %}
+{% load static %}
+{% block content %}    
+
+<section class="py-20 px-10 bg-gray-50">
+    <div class="text-center max-w-4xl mx-auto mb-16">
+      <h2 class="text-3xl font-bold text-gray-700 uppercase">Nurturing a New Generation of Change-Makers</h2>
+          <p class="mt-6 text-gray-600">
+            Nestled in Lombok Tengah, our innovative school puts students at the heart of learning.
+            Embracing each child’s uniqueness, we encourage curiosity through exploration.</p>
+        </div>
+
+    <div class="grid md:grid-cols-2 gap-10 items-center max-w-4xl mx-auto mt-12">
+      <div class="relative">
+        <div class="absolute -left-6 -top-6 w-full h-full bg-green-600 rounded-2xl"></div>
+        <div class="relative rounded-2xl overflow-hidden shadow-lg">
+          <Image
+                src="{% static '/images/DSC05095-scaled.jpg' %}"
+                alt="Founder"
+                width={400}
+                height={300}
+                class="object-cover"/>
+            </div>
+          </div>
+          <div>
+
+          <h3 class="text-2xl font-bold text-gray-700 mb-4">Our Founder – Baiq Dewi Yuningsih</h3>
+          <p class="text-gray-600 mb-4">
+            Dewi is an innovative problem solver inspired by the challenges of children in her community.
+            She dedicates her work to environmental sustainability and holistic education.
+          </p>
+          <p class="text-gray-600 mb-6">
+            By integrating her passion for education and environment with international experience,
+            she connects community-centred programs with greater opportunities.
+          </p>
+
+      <div class="flex space-x-4 mt-4">
+        <a href="#" class="bg-blue-600 text-white p-2 rounded hover:opacity-80 flex items-center justify-center w-8 h-8">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22 12a10 10 0 1 0-11.5 9.95v-7.05H8v-2.9h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.3.2 2.3.2v2.5H15c-1.2 0-1.6.8-1.6 1.6v1.9h2.8l-.4 2.9h-2.4v7.05A10 10 0 0 0 22 12"/>
+          </svg></a>
+        <a href="#" class="bg-pink-500 text-white p-2 rounded hover:opacity-80 flex items-center justify-center w-8 h-8">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.056 1.96.24 2.41.403a4.88 4.88 0 0 1 1.76 1.01 4.88 4.88 0 0 1 1.01 1.76c.163.45.347 1.24.403 2.41.058 1.267.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.96-.403 2.41a4.88 4.88 0 0 1-1.01 1.76 4.88 4.88 0 0 1-1.76 1.01c-.45.163-1.24.347-2.41.403-1.267.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.96-.24-2.41-.403a4.88 4.88 0 0 1-1.76-1.01 4.88 4.88 0 0 1-1.01-1.76c-.163-.45-.347-1.24-.403-2.41C2.212 15.584 2.2 15.2 2.2 12s.012-3.584.07-4.85c.056-1.17.24-1.96.403-2.41a4.88 4.88 0 0 1 1.01-1.76 4.88 4.88 0 0 1 1.76-1.01c.45-.163 1.24-.347 2.41-.403C8.416 2.212 8.8 2.2 12 2.2zm0 1.8c-3.16 0-3.53.012-4.77.07-1.09.05-1.68.22-2.08.367a3.09 3.09 0 0 0-1.13.726 3.09 3.09 0 0 0-.726 1.13c-.146.4-.317.987-.367 2.08-.058 1.24-.07 1.61-.07 4.77s.012 3.53.07 4.77c.05 1.09.22 1.68.367 2.08.174.478.39.9.726 1.13.336.23.652.4 1.13.726.4.146.987.317 2.08.367 1.24.058 1.61.07 4.77.07s3.53-.012 4.77-.07c1.09-.05 1.68-.22 2.08-.367a3.09 3.09 0 0 0 1.13-.726 3.09 3.09 0 0 0 .726-1.13c.146-.4.317-.987.367-2.08.058-1.24.07-1.61.07-4.77s-.012-3.53-.07-4.77c-.05-1.09-.22-1.68-.367-2.08a3.09 3.09 0 0 0-.726-1.13 3.09 3.09 0 0 0-1.13-.726c-.4-.146-.987-.317-2.08-.367-1.24-.058-1.61-.07-4.77-.07zm0 3a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 1.8a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4zm6.3-1.8a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/>
+          </svg></a>
+        <a href="#" class="bg-blue-700 text-white p-2 rounded hover:opacity-80 flex items-center justify-center w-8 h-8">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M4.98 3.5a2.5 2.5 0 1 1-.001 5.001A2.5 2.5 0 0 1 4.98 3.5zM2 9h6v12H2V9zm8 0h5.5v1.7h.1c.8-1.5 2.7-3 5.6-3 6 0 7.1 3.9 7.1 8.9V21h-6v-6.6c0-1.6-.03-3.7-2.2-3.7-2.2 0-2.5 1.7-2.5 3.6V21h-6V9z"/>
+          </svg></a>
+        <a href="#" class="bg-red-600 text-white p-2 rounded hover:opacity-80 flex items-center justify-center w-8 h-8">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19.6 3.2H4.4A1.6 1.6 0 0 0 2.8 4.8v14.4a1.6 1.6 0 0 0 1.6 1.6h15.2a1.6 1.6 0 0 0 1.6-1.6V4.8a1.6 1.6 0 0 0-1.6-1.6zM10 16V8l6 4-6 4z"/>
+          </svg>
+        </a>
+      </div>
+</div>
+</section>
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-gray-700 mb-10 text-center">Our Gallery</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="overflow-hidden rounded-xl shadow-lg">
+        <img src="{% static '/images/DSC05095-scaled.jpg' %}" alt="Gallery 1" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300">
+      </div>
+      <div class="overflow-hidden rounded-xl shadow-lg">
+        <img src="{% static '/images/WIN_20260214_12_52_46_Pro.jpg' %}" alt="Gallery 2" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300">
+      </div>
+      <div class="overflow-hidden rounded-xl shadow-lg">
+        <img src="{% static '/images/DSC05100-1536x1536.jpg' %}" alt="Gallery 3" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300">
+      </div>
+      <div class="overflow-hidden rounded-xl shadow-lg">
+        <img src="{% static '/images/WIN_20260214_12_53_01_Pro.jpg' %}" alt="Gallery 4" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300">
+      </div>
+      <div class="overflow-hidden rounded-xl shadow-lg">
+        <img src="{% static '/images/DSC08020-1-1536x1026.jpg' %}" alt="Gallery 5" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300">
+      </div>
+      <div class="overflow-hidden rounded-xl shadow-lg">
+        <img src="{% static '/images/WIN_20260214_12_52_46_Pro.jpg' %}" alt="Gallery 6" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="bg-green-700 h-10 w-full"></section> -->
+  <section class="py-16">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="rounded-2xl shadow-xl overflow-hidden">
+      <iframe 
+        src="https://www.google.com/maps?q=Dusun+Sekar+Kuning,+Kuta,+Pujut,+Lombok+Tengah&output=embed"
+        class="w-full h-[400px] lg:h-[450px] border-0"
+        allowfullscreen=""
+        loading="lazy">
+      </iframe>
+    </div>
+
+  </div>
+</section>
+
+
+{% endblock %}

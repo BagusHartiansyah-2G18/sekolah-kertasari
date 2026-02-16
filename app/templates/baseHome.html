@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+    <div class="bg-[#6A8F6B] text-white py-3">
+      <div class="max-w-7xl mx-auto px-6 flex justify-center items-center gap-6">
+        <p class="font-medium tracking-wide">Enrollment for 2025-2026 Now Open!</p>
+        <button class="bg-white text-[#6A8F6B] px-5 py-1 rounded-md font-semibold hover:bg-gray-100 transition">
+          Apply</button>
+      </div>
+    </div> 
+
+<div class="bg-gray-900">
+  <header class="bg-white shadow">
+  <nav class="flex items-center justify-between p-6 lg:px-12">
+    
+    <!-- Logo -->
+    <div class="flex lg:flex-1">
+      <a href="/" class="-m-1.5 p-1.5">
+        <img src="{% static 'images/Primary-Logo-Anak-Alam-Original.png' %}" 
+             alt="Logo" 
+             class="h-12 w-auto ml-4" />
+      </a>
+    </div>
+
+    <!-- Desktop Menu -->
+    <div class="hidden lg:flex gap-x-12">
+      <a href="/" class="text-base font-semibold {% if request.path == '/' %}text-green-700{% else %}text-black{% endif %}">Home</a>
+      <a href="/about" class="text-base font-semibold {% if request.path == '/about' %}text-green-700{% else %}text-black{% endif %}">About</a>
+      <a href="/programs" class="text-base font-semibold {% if request.path == '/programs' %}text-green-700{% else %}text-black{% endif %}">Programs</a>
+      <a href="/faq" class="text-base font-semibold {% if request.path == '/faq' %}text-green-700{% else %}text-black{% endif %}">FAQ</a>
+      <a href="/contact" class="text-base font-semibold {% if request.path == '/contact' %}text-green-700{% else %}text-black{% endif %}">Contact</a>
+      <a href="/login" class="text-base font-semibold {% if request.path == '/login' %}text-green-700{% else %}text-black{% endif %}">Login</a>
+   
+    </div>
+
+    <!-- Hamburger Button -->
+    <div class="lg:hidden">
+      <button onclick="toggleMenu()" class="text-black focus:outline-none">
+        ☰
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden lg:hidden bg-white shadow-md">
+    <div class="flex flex-col space-y-4 p-6">
+      <a href="/" class="text-base font-semibold {% if request.path == '/' %}text-green-700{% else %}text-black{% endif %}">Home</a>
+      <a href="/about" class="text-base font-semibold {% if request.path == '/about' %}text-green-700{% else %}text-black{% endif %}">About</a>
+      <a href="/programs" class="text-base font-semibold {% if request.path == '/programs' %}text-green-700{% else %}text-black{% endif %}">Programs</a>
+      <a href="/faq" class="text-base font-semibold {% if request.path == '/faq' %}text-green-700{% else %}text-black{% endif %}">FAQ</a>
+      <a href="/contact" class="text-base font-semibold {% if request.path == '/contact' %}text-green-700{% else %}text-black{% endif %}">Contact</a>
+      <a href="/login" class="text-base font-semibold {% if request.path == '/login' %}text-green-700{% else %}text-black{% endif %}">Login</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("mobileMenu");
+    menu.classList.toggle("hidden");
+  }
+</script>
+
+
+{% block hero %}
+{% if request.path == '/' %}
+  <section class="relative pt-28 pb-20 px-6 lg:px-8 h-[500px]">
+    <div class="absolute inset-0 -z-10">
+      <img src="{% static '/images/WIN_20260214_12_53_28_Pro.jpg' %}" 
+           alt="Hero Background" 
+           class="w-full h-full object-cover">
+    </div>
+    <div class="mx-auto max-w-2xl text-center flex items-center justify-center h-full">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+        Welcome to Anak Alam Intercultural School
+      </h1>
+    </div>
+  </section>
+  {% endif %}
+  {% endblock %}
+</div>
+    {% block content %}
+    {% endblock %}
+
+<footer class="bg-gray-200 text-gray-800 mt-20">
+  <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-12"><div>
+      <img src="{% static '/images/Primary-Logo-Anak-Alam-Original.png' %}" alt="Logo" class="h-20 mb-6">
+      <p class="mb-6 text-sm leading-relaxed">Anak Alam School is a vibrant haven for young minds,
+        fostering a holistic approach to education.</p>
+
+      <img src="{% static '/images/logo-anps.jpg' %}" alt="Association Logo" class="h-14 mb-6">
+      <p class="text-sm leading-relaxed">
+        Embracing play-based and place-based learning, our curriculum unfolds
+        in a joyful atmosphere where exploration is encouraged.
+        With a rich cultural tapestry and expert educators,
+        we provide a transformative learning experience.</p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-bold mb-6">QUICK LINKS</h3>
+      <ul class="space-y-4">
+        <li><a href="#" class="hover:text-green-700 transition">Our Teams</a></li>
+        <li><a href="#" class="hover:text-green-700 transition">Programs</a></li>
+        <li><a href="#" class="hover:text-green-700 transition">FAQ</a></li>
+        <li><a href="#" class="hover:text-green-700 transition">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-bold mb-6">CONTACT DETAILS</h3>
+
+      <p class="mb-4 text-sm leading-relaxed">
+        Dusun Sekar Kuning, Kuta, Kec. Pujut,<br>
+        Kabupaten Lombok Tengah,<br>
+        Nusa Tenggara Barat. 83573</p>
+      <p class="mb-2 text-sm">WA: +62 878-4602-8188</p>
+      <p class="mb-6 text-sm">admin@anakalamschool.org</p>
+
+      <div class="flex space-x-4 mt-6">
+          <a href="#" class="bg-blue-600 text-white p-2 rounded hover:opacity-80 flex items-center justify-center w-8 h-8">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22 12a10 10 0 1 0-11.5 9.95v-7.05H8v-2.9h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.3.2 2.3.2v2.5H15c-1.2 0-1.6.8-1.6 1.6v1.9h2.8l-.4 2.9h-2.4v7.05A10 10 0 0 0 22 12"/>
+            </svg></a>
+          <a href="#" class="bg-pink-500 text-white p-2 rounded hover:opacity-80 flex items-center justify-center w-8 h-8">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.056 1.96.24 2.41.403a4.88 4.88 0 0 1 1.76 1.01 4.88 4.88 0 0 1 1.01 1.76c.163.45.347 1.24.403 2.41.058 1.267.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.96-.403 2.41a4.88 4.88 0 0 1-1.01 1.76 4.88 4.88 0 0 1-1.76 1.01c-.45.163-1.24.347-2.41.403-1.267.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.96-.24-2.41-.403a4.88 4.88 0 0 1-1.76-1.01 4.88 4.88 0 0 1-1.01-1.76c-.163-.45-.347-1.24-.403-2.41C2.212 15.584 2.2 15.2 2.2 12s.012-3.584.07-4.85c.056-1.17.24-1.96.403-2.41a4.88 4.88 0 0 1 1.01-1.76 4.88 4.88 0 0 1 1.76-1.01c.45-.163 1.24-.347 2.41-.403C8.416 2.212 8.8 2.2 12 2.2zm0 1.8c-3.16 0-3.53.012-4.77.07-1.09.05-1.68.22-2.08.367a3.09 3.09 0 0 0-1.13.726 3.09 3.09 0 0 0-.726 1.13c-.146.4-.317.987-.367 2.08-.058 1.24-.07 1.61-.07 4.77s.012 3.53.07 4.77c.05 1.09.22 1.68.367 2.08.174.478.39.9.726 1.13.336.23.652.4 1.13.726.4.146.987.317 2.08.367 1.24.058 1.61.07 4.77.07s3.53-.012 4.77-.07c1.09-.05 1.68-.22 2.08-.367a3.09 3.09 0 0 0 1.13-.726 3.09 3.09 0 0 0 .726-1.13c.146-.4.317-.987.367-2.08.058-1.24.07-1.61.07-4.77s-.012-3.53-.07-4.77c-.05-1.09-.22-1.68-.367-2.08a3.09 3.09 0 0 0-.726-1.13 3.09 3.09 0 0 0-1.13-.726c-.4-.146-.987-.317-2.08-.367-1.24-.058-1.61-.07-4.77-.07zm0 3a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 1.8a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4zm6.3-1.8a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/>
+            </svg></a>
+          <a href="#" class="bg-blue-700 text-white p-2 rounded hover:opacity-80 flex items-center justify-center w-8 h-8">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M4.98 3.5a2.5 2.5 0 1 1-.001 5.001A2.5 2.5 0 0 1 4.98 3.5zM2 9h6v12H2V9zm8 0h5.5v1.7h.1c.8-1.5 2.7-3 5.6-3 6 0 7.1 3.9 7.1 8.9V21h-6v-6.6c0-1.6-.03-3.7-2.2-3.7-2.2 0-2.5 1.7-2.5 3.6V21h-6V9z"/>
+            </svg></a>
+          <a href="#" class="bg-red-600 text-white p-2 rounded hover:opacity-80 flex items-center justify-center w-8 h-8">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.6 3.2H4.4A1.6 1.6 0 0 0 2.8 4.8v14.4a1.6 1.6 0 0 0 1.6 1.6h15.2a1.6 1.6 0 0 0 1.6-1.6V4.8a1.6 1.6 0 0 0-1.6-1.6zM10 16V8l6 4-6 4z"/>
+            </svg></a>
+        </div>
+    </div>
+  </div>
+
+  <div class="border-t border-orange-400 max-w-7xl mx-auto"></div>
+  <div class="text-center py-6 text-sm">
+    Anak Alam Intercultural School © Copyright 2025. All Rights Reserved.</div>
+</footer>
+
+</body>
+</html>

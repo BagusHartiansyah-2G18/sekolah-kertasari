@@ -1,0 +1,72 @@
+{% extends "baseHome.html" %}
+{% load static %}
+
+{% block hero %}
+<section class="bg-[#244c42] text-white py-24 rounded-b-[60px]">
+  <div class="max-w-4xl mx-auto text-center px-6">
+    <h1 class="text-4xl md:text-5xl font-bold mb-6">Frequently Asked Questions</h1>
+    <p class="text-gray-200 text-lg">
+      For your convenience, we have gathered answers to commonly asked
+      questions. If you cannot find what you’re looking for,
+      please feel free to contact us.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="bg-gray-100 py-20">
+  <div class="max-w-3xl mx-auto px-6">
+    <h2 class="text-xl font-semibold mb-6 border-b-4 border-yellow-500 inline-block pb-2">Enrollment Applications</h2>
+    <div class="space-y-4 mt-8">
+      <details class="bg-white border border-green-500 rounded-lg p-4 group">
+        <summary class="cursor-pointer font-semibold text-green-700">
+          When should we start an application to enrol at AAIS?</summary>
+        <p class="mt-4 text-gray-700 leading-relaxed">
+          Please contact us as soon as you think that a move to Lombok
+          may be in your future. Admissions are reviewed on a rolling basis.
+          We suggest gathering your materials early to complete
+          your application as soon as possible.</p>
+      </details>
+
+      <details class="bg-white border border-green-500 rounded-lg p-4">
+        <summary class="cursor-pointer font-semibold text-green-700">
+          When will applications not be processed in a given year?</summary>
+        <p class="mt-4 text-gray-700 leading-relaxed">
+          Applications may pause during school holidays or when classes
+          have reached capacity. Please contact our admissions office
+          for updated availability.</p>
+      </details>
+
+      <details class="bg-white border border-green-500 rounded-lg p-4">
+        <summary class="cursor-pointer font-semibold text-green-700">
+          How compatible is AAIS curriculum with other international schools?</summary>
+        <p class="mt-4 text-gray-700 leading-relaxed">
+          Our curriculum is aligned with international standards,
+          making transitions smooth for students moving between schools
+          locally and globally.</p>
+      </details>
+
+      <details class="bg-white border border-green-500 rounded-lg p-4">
+        <summary class="cursor-pointer font-semibold text-green-700">
+          Do you offer extracurricular programs?</summary>
+        <p class="mt-4 text-gray-700 leading-relaxed">
+          Yes, we offer a variety of extracurricular activities including
+          arts, sports, environmental programs, and cultural workshops.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray-100 py-16">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="bg-gradient-to-r from-gray-800 to-black rounded-xl py-14 px-8 text-center text-white shadow-lg">
+      <h2 class="text-3xl font-semibold mb-4">Still have question?</h2>
+      <p class="text-gray-300 max-w-2xl mx-auto mb-8">
+        Don’t hesitate to reach out to us. Our team of experts is here to 
+        provide you with the answers and guidance you need.</p>
+      <a href="{% url 'contact' %}"
+         class="inline-block bg-[#0ea5e9] hover:bg-[#0284c7] text-white px-6 py-3 rounded-lg transition duration-300">Contact Us</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

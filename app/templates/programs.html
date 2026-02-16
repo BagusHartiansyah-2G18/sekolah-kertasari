@@ -1,0 +1,53 @@
+{% extends 'baseHome.html' %}
+{% load static %} 
+{% block content %}    
+<section class="bg-gray-200 py-24">
+  <div class="max-w-4xl mx-auto text-center px-6">
+    <h2 class="text-gray-600 tracking-widest text-lg font-semibold mb-4">Our Programs</h2>
+    <p class="text-gray-800 leading-relaxed text-lg">
+      Our program blends play-based and nature-based activities, ensuring 
+      age-appropriate experiences that foster holistic child development. 
+      Through engaging play and exploration, we aim to cultivate potential, 
+      enhance problem-solving, and instill a love for learning. The 
+      incorporation of nature enriches the environment, connecting children 
+      with the world around them. The program emphasizes not only 
+      academic skills but also essential life skills, shaping well-rounded 
+      individuals for future success. Don’t be surprised to witness our school mantra in action daily:  At Anak Alam School, we care, we show respect, we love to grow, and we always try our best!</p>
+  </div>
+</section>
+
+<section class=" py-24">
+  <div class="max-w-4xl mx-auto text-center px-6">
+    <h2 class="text-gray-600 tracking-widest text-lg font-semibold mb-4">Early Years</h2>
+    <p class="text-gray-800 leading-relaxed text-lg">
+     Our Early Years Program is a Play based curriculum anchored in hands-on nature experiences, learning by doing and working with 
+     and caring about others to build positive relationships and social-emotional thinking skills.Teaching and learning is student 
+     centred and inquiry based with our literacy and numeracy outcomes from the Australian Curriculum Learning Framework.</p>
+  </div>
+</section>
+
+<section class=" pb-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="bg-[#7f9b86] rounded-3xl p-10 md:p-14 
+                md:flex md:items-center md:gap-12">
+      <div class="md:w-1/2 text-white space-y-6">
+        <h2 class="text-3xl font-bold">Community Engagement</h2>
+        <p class="leading-relaxed">
+          Students, staff and families engage with the community in meaningful service. We embrace the Oath for Compassionate 
+          Helpers with the core commitment of:“ I will listen carefully and seek ways to empower others while never doing for 
+          others what they have the capacity to do for themselves.”  </p>
+
+        <p class="leading-relaxed">
+          Anak Alam IS runs after school classes for local children to learn English and be capable of taking action for sustainable 
+          solutions in the community. The management team is committed to supporting the regional education department in training 
+          teachers in innovative pedagogy, through internships, workshops and lectures.</p>
+      </div>
+      <div class="md:w-1/2 mt-8 md:mt-0">
+        <img src="{% static '/images/WIN_20260214_12_53_28_Pro.jpg' %}"
+             alt="Mission Image"
+             class="rounded-xl w-full">
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
