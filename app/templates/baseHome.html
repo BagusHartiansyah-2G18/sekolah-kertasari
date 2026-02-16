@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>anak alam school</title>
     {% load static %}
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -72,25 +72,27 @@
 
 {% block hero %}
 {% if request.path == '/' %}
-  <section class="relative pt-28 pb-20 px-6 lg:px-8 h-[500px]">
-    <div class="absolute inset-0 -z-10">
-      <img src="{% static '/images/WIN_20260214_12_53_28_Pro.jpg' %}" 
-           alt="Hero Background" 
-           class="w-full h-full object-cover">
-    </div>
-    <div class="mx-auto max-w-2xl text-center flex items-center justify-center h-full">
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-        Welcome to Anak Alam Intercultural School
-      </h1>
-    </div>
-  </section>
+  <section class="relative pt-28 pb-20 px-6 lg:px-8 h-[500px] overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="{% static 'images/DSC05095-scaled.jpg' %}"
+         alt="Hero Background"
+         class="w-full h-full object-cover">
+  </div>
+  <div class="absolute inset-0 bg-black/40 z-10"></div>
+  <div class="relative z-20 mx-auto max-w-2xl text-center flex items-center justify-center h-full">
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+      Welcome to Anak Alam Intercultural School
+    </h1>
+  </div>
+</section>
   {% endif %}
   {% endblock %}
+
 </div>
     {% block content %}
     {% endblock %}
 
-<footer class="bg-gray-200 text-gray-800 mt-20">
+<footer class="bg-gray-200 text-gray-800">
   <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-12"><div>
       <img src="{% static '/images/Primary-Logo-Anak-Alam-Original.png' %}" alt="Logo" class="h-20 mb-6">
       <p class="mb-6 text-sm leading-relaxed">Anak Alam School is a vibrant haven for young minds,
