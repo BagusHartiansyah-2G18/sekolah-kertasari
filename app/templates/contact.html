@@ -17,22 +17,22 @@
       <div class="space-y-6">
         <div>
           <h3 class="font-semibold text-green-700">Address</h3>
-          <p class="text-gray-700">Lombok, Tabanan, Bali, Indonesia</p>
+          <p class="text-gray-700" id="alamat1">Lombok, Tabanan, Bali, Indonesia</p>
         </div>
 
         <div>
           <h3 class="font-semibold text-green-700">Email</h3>
-          <p class="text-gray-700">info@anakalamschool.org</p>
+          <p class="text-gray-700" id="email1">info@anakalamschool.org</p>
         </div>
 
         <div>
           <h3 class="font-semibold text-green-700">Phone / WhatsApp</h3>
-          <p class="text-gray-700">+62 8xx xxxx xxxx</p>
+          <p class="text-gray-700" id="wa1">+62 8xx xxxx xxxx</p>
         </div>
       </div>
 
-      <div class="mt-8">
-        <iframe 
+      <div class="mt-8" id="maps">
+        <!-- <iframe 
           src="https://www.google.com/maps?q=Anak+Alam+School+Bali&output=embed"
           width="100%" 
           height="250" 
@@ -40,48 +40,65 @@
           allowfullscreen="" 
           loading="lazy"
           class="rounded-xl shadow-md">
-        </iframe>
+        </iframe> -->
       </div>
     </div>
 
     <div class="bg-white p-8 rounded-xl shadow-lg">
       <h2 class="text-2xl font-semibold text-gray-800 mb-6">Send a Message</h2>
       <form method="POST" class="space-y-6">
-      {% csrf_token %}
+        {% csrf_token %}
+
+        {% if messages %}
+          {% for message in messages %}
+            <div class="p-3 rounded bg-green-100 text-green-700">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
 
         <div>
-          <label class="block text-gray-700 mb-2">Full Name</label>
-          <input type="text" name="name"
-            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600">
+          <label>Full Name</label>
+          {{ form.name }}
+          <small class="text-red-500">{{ form.name.errors }}</small>
         </div>
 
         <div>
-          <label class="block text-gray-700 mb-2">Email Address</label>
-          <input type="email" name="email"
-            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600">
+          <label>Email</label>
+          {{ form.email }}
+          <small class="text-red-500">{{ form.email.errors }}</small>
         </div>
 
         <div>
-          <label class="block text-gray-700 mb-2">Subject</label>
-          <input type="text" name="subject"
-            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600">
+          <label>Subject</label>
+          {{ form.subject }}
+          <small class="text-red-500">{{ form.subject.errors }}</small>
         </div>
 
         <div>
-          <label class="block text-gray-700 mb-2">Message</label>
-          <textarea name="message" rows="5"
-            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600"></textarea>
+          <label>Message</label>
+          {{ form.message }}
+          <small class="text-red-500">{{ form.message.errors }}</small>
         </div>
 
         <button type="submit"
-          class="bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-800 transition duration-300 w-full">
+          class="bg-green-700 text-white px-6 py-3 rounded-lg w-full">
           Send Message
         </button>
-
       </form>
 
     </div>
 
   </div>
 </section>
+<script>
+
+  window.addEventListener("load", function () {  
+    document.getElementById("maps").innerHTML=_.__alamat(6).keterangan
+    document.getElementById("alamat1").innerHTML =_.__alamat(7).keterangan;
+    document.getElementById("wa1").innerHTML =_.__alamat(8).keterangan;
+    document.getElementById("email1").innerHTML =_.__alamat(9).keterangan;
+  });
+  
+</script>
 {% endblock %}

@@ -3,7 +3,7 @@
 
 {% block hero %}
 <section class="bg-[#244c42] text-white py-24 rounded-b-[60px]">
-  <div class="max-w-4xl mx-auto text-center px-6">
+  <div class="max-w-4xl mx-auto text-center px-6" id="tagline6">
     <h1 class="text-4xl md:text-5xl font-bold mb-6">Frequently Asked Questions</h1>
     <p class="text-gray-200 text-lg">
       For your convenience, we have gathered answers to commonly asked
@@ -17,7 +17,7 @@
 <section class="bg-gray-100 py-20">
   <div class="max-w-3xl mx-auto px-6">
     <h2 class="text-xl font-semibold mb-6 border-b-4 border-yellow-500 inline-block pb-2">Enrollment Applications</h2>
-    <div class="space-y-4 mt-8">
+    <div class="space-y-4 mt-8" id="faq">
       <details class="bg-white border border-green-500 rounded-lg p-4 group">
         <summary class="cursor-pointer font-semibold text-green-700">
           When should we start an application to enrol at AAIS?</summary>
@@ -69,4 +69,29 @@
     </div>
   </div>
 </section>
+<script>
+
+  window.addEventListener("load", function () {  
+    _.faq = JSON.parse('{{ faq|escapejs }}');   
+    // console.log(_);
+     
+    tagline6(_.__tagline(34))
+    faq()
+  });
+  function tagline6({judul,keterangan}) {
+    document.getElementById("tagline6").innerHTML =`
+    <h1 class="text-4xl md:text-5xl font-bold mb-6">${judul}</h1>
+    <p class="text-gray-200 text-lg">${keterangan}</p>
+    `
+  }
+  function faq() {
+    document.getElementById("faq").innerHTML =_.faq.map(({judul,keterangan,gambar},i)=>`
+      <details class="bg-white border border-green-500 rounded-lg p-4 group">
+        <summary class="cursor-pointer font-semibold text-green-700">${judul}</summary>
+        <p class="mt-4 text-gray-700 leading-relaxed">${keterangan}</p>
+      </details>
+    `).join("")
+  } 
+
+</script>
 {% endblock %}

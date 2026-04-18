@@ -2,7 +2,7 @@
 {% load static %} 
 {% block content %}    
 <section class="bg-gray-200 py-24">
-  <div class="max-w-4xl mx-auto text-center px-6">
+  <div class="max-w-4xl mx-auto text-center px-6" id="tagline4">
     <h2 class="text-gray-600 tracking-widest text-lg font-semibold mb-4">Our Programs</h2>
     <p class="text-gray-800 leading-relaxed text-lg">
       Our program blends play-based and nature-based activities, ensuring 
@@ -16,7 +16,7 @@
   </div>
 </section>
 
-<section class=" py-24">
+<section class=" py-24" id="program">
   <div class="max-w-4xl mx-auto text-center px-6">
     <h2 class="text-gray-600 tracking-widest text-lg font-semibold mb-4">Early Years</h2>
     <p class="text-gray-800 leading-relaxed text-lg">
@@ -29,7 +29,7 @@
 <section class=" pb-20">
   <div class="max-w-6xl mx-auto px-6">
     <div class="bg-[#7f9b86] rounded-3xl p-10 md:p-14 
-                md:flex md:items-center md:gap-12">
+                md:flex md:items-center md:gap-12" id="tagline5">
       <div class="md:w-1/2 text-white space-y-6">
         <h2 class="text-3xl font-bold">Community Engagement</h2>
         <p class="leading-relaxed">
@@ -50,4 +50,46 @@
     </div>
   </div>
 </section>
+<script>
+
+  window.addEventListener("load", function () {  
+    _.program = JSON.parse('{{ program|escapejs }}');   
+    // console.log(_);
+     
+    tagline4(_.__tagline(29))
+    tagline5(_.__tagline(33))
+    program()
+  });
+  function tagline4({judul,keterangan}) {
+    document.getElementById("tagline4").innerHTML =`
+    <div class="max-w-4xl mx-auto text-center px-6 mb-10">
+      <h2 class="text-green-600 tracking-widest text-lg font-semibold mb-4">${judul}</h2>
+      <p class="text-gray-800 leading-relaxed text-lg">${keterangan}</p>
+    </div>
+    `
+  }
+  function tagline5({judul,keterangan,gambar}) {
+    document.getElementById("tagline5").innerHTML =`
+      <div class="md:w-1/2 text-white space-y-6">
+        <h2 class="text-3xl font-bold">${judul}</h2>
+        <p class="leading-relaxed">${keterangan}</p>
+      </div>
+      <div class="md:w-1/2 mt-8 md:mt-0">
+        <img src="media/${gambar}"
+              alt="Mission Image"
+              class="rounded-xl w-full">
+      </div>
+    `
+  }
+  
+  function program() {
+    document.getElementById("program").innerHTML =_.program.map(({judul,keterangan,gambar},i)=>`
+      <div class="max-w-4xl mx-auto text-center px-6 mb-10">
+        <h2 class="text-green-600 tracking-widest text-lg font-semibold mb-4">${judul}</h2>
+        <p class="text-gray-800 leading-relaxed text-lg">${keterangan}</p>
+      </div>
+    `).join("")
+  } 
+
+</script>
 {% endblock %}

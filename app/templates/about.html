@@ -2,7 +2,7 @@
 {% load static %} 
 {% block content %}    
 <section class="bg-gray-200 py-24">
-  <div class="max-w-4xl mx-auto text-center px-6">
+  <div class="max-w-4xl mx-auto text-center px-6" id="tagline2">
     <h2 class="text-gray-600 tracking-widest text-lg font-semibold mb-4">ABOUT US</h2>
     <h1 class="text-3xl md:text-4xl font-bold text-green-800 mb-10">Cultivating Curious Minds</h1>
     <p class="text-gray-800 leading-relaxed text-lg">
@@ -19,8 +19,8 @@
 <section class=" py-20">
   <div class="max-w-6xl mx-auto px-6">
     <div class="bg-[#d6b3a3] rounded-3xl p-10 md:p-14 
-                md:flex md:items-center md:gap-12">
-      <div class="md:w-1/2 text-white space-y-6">
+                md:flex md:items-center md:gap-12" id="visi">
+      <div class="md:w-1/2 text-white space-y-6" >
         <h2 class="text-3xl font-bold">Our Vision</h2>
         <p class="leading-relaxed">
           At AAIS our vision is to provide a vigorous curriculum that empowers
@@ -44,7 +44,7 @@
 <section class=" pb-20">
   <div class="max-w-6xl mx-auto px-6">
     <div class="bg-[#7f9b86] rounded-3xl p-10 md:p-14 
-                md:flex md:items-center md:gap-12">
+                md:flex md:items-center md:gap-12" id="misi">
       <div class="md:w-1/2 text-white space-y-6">
         <h2 class="text-3xl font-bold">Our Mission</h2>
         <p class="leading-relaxed">
@@ -65,7 +65,7 @@
 </section>
 
 <section class="bg-gray-100 py-24">
-  <div class="max-w-6xl mx-auto px-6 space-y-28">
+  <div class="max-w-6xl mx-auto px-6 space-y-28" id="brandcontent">
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div>
         <h2 class="text-3xl font-bold mb-6">A Vigorous Curriculum</h2>
@@ -125,11 +125,11 @@
 
 <div class="bg-gray-900 py-24 sm:py-32">
   <div class="mx-auto grid max-w-7xl gap-20 px-6 lg:px-8 xl:grid-cols-3">
-    <div class="max-w-xl">
+    <div class="max-w-xl" id="tagline3">
       <h2 class="text-3xl font-semibold tracking-tight text-pretty text-white sm:text-4xl">Meet our leadership</h2>
       <p class="mt-6 text-lg/8 text-gray-400">We’re a dynamic group of individuals who are passionate about what we do and dedicated to delivering the best results for our clients.</p>
     </div>
-    <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
+    <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2" id="lead">
       <li>
         <div class="flex items-center gap-x-6">
           <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-16 rounded-full outline-1 -outline-offset-1 outline-white/10" />
@@ -187,4 +187,99 @@
     </ul>
   </div>
 </div>
+<script>
+
+  window.addEventListener("load", function () {  
+    _.visi = JSON.parse('{{ visi|escapejs }}');    
+    _.brandcontent = JSON.parse('{{ brandcontent|escapejs }}');
+    _.lead = JSON.parse('{{ lead|escapejs }}');
+    
+    // console.log(_);
+    
+    tagline2(_.__tagline(13))
+    document.getElementById("visi").innerHTML = visi(_.__visi(14))
+    document.getElementById("misi").innerHTML = visi(_.__visi(15))
+    
+    brandcontent()
+    tagline3(_.__tagline(26))
+    lead()
+
+    // console.log(_.__alamat(6).keterangan);
+    
+    //  document.getElementById("maps").innerHTML=_.__alamat(6).keterangan
+  });
+  function tagline2({judul,keterangan}) {
+    document.getElementById("tagline2").innerHTML =`
+    <h2 class="text-gray-600 tracking-widest text-lg font-semibold mb-4">ABOUT US</h2>
+    <h1 class="text-3xl md:text-4xl font-bold text-green-800 mb-10">${judul}</h1>
+    <p class="text-gray-800 leading-relaxed text-lg">${keterangan}</p>
+    `
+  }
+  function visi({judul,keterangan,gambar}) {
+    return `
+      <div class="md:w-1/2 text-white space-y-6" >
+        <h2 class="text-3xl font-bold">${judul}</h2>
+        <p class="leading-relaxed">${keterangan}</p>
+      </div>
+      <div class="md:w-1/2 mt-8 md:mt-0">
+        <img src="media/${gambar}"
+             alt="Vision Image"
+             class="rounded-xl w-full">
+      </div>
+    `
+  }
+  
+  function brandcontent() {
+    document.getElementById("brandcontent").innerHTML =_.brandcontent.map(({judul,keterangan,gambar},i)=>{
+      if(i%2 == 0){
+        return `
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 class="text-3xl font-bold mb-6">${judul}</h2>
+              <p class="text-gray-700 leading-relaxed">${keterangan}</p>
+            </div>
+            <div>
+              <img src="media/${gambar}" 
+                  class="rounded-2xl shadow-lg w-full">
+            </div>
+          </div>
+        `
+      }
+      return `
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="order-2 md:order-1">
+          <img src="media/${gambar}" 
+              class="rounded-2xl shadow-lg w-full">
+        </div>
+        <div class="order-1 md:order-2">
+          <h2 class="text-3xl font-bold mb-6">${judul}</h2>
+          <p class="text-gray-700 leading-relaxed">${keterangan}</p>
+        </div>
+      </div>
+      `
+    }).join("")
+  }
+  function lead() {
+    document.getElementById("lead").innerHTML =_.lead.map(({judul,keterangan,gambar},i)=>`
+      <li>
+        <div class="flex items-center gap-x-6">
+          <img src="media/${gambar}" alt="" class="size-16 rounded-full outline-1 -outline-offset-1 outline-white/10" />
+          <div>
+            <h3 class="text-base/7 font-semibold tracking-tight text-white">${judul}</h3>
+            <p class="text-sm/6 font-semibold text-indigo-400">${keterangan}</p>
+          </div>
+        </div>
+      </li>
+    `).join("")
+  }
+  
+  function tagline3({judul,keterangan,gambar}) {
+    document.getElementById("tagline3").innerHTML = `
+      <h2 class="text-3xl font-semibold tracking-tight text-pretty text-white sm:text-4xl">${judul}</h2>
+    <p class="mt-6 text-lg/8 text-gray-400">${keterangan}</p>
+    `
+  }
+    
+
+</script>
 {% endblock %}

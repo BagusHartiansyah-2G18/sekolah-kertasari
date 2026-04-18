@@ -1,6 +1,6 @@
 from django.urls import path,include
 # from app.views.Vpage import dashboard,data,pengusaha,denda,wilaya,monitoring
-from app.views.views import home, about, programs, faq, contact, login
+from app.views.views import home, about, programs, faq, contact
 
 # from app.views.Vapi.VAsimtax import simtax_login,simtax_get_transaksi,TransaksiPajakViewSet
 
@@ -18,7 +18,7 @@ urlpatterns = [
     path('programs', programs, name='programs'),
     path('faq', faq, name='faq'),
     path('contact', contact, name='contact'),
-    path('login', contact, name='login'),
+    # path('login', contact, name='login'),
     # path('pengusaha', pengusaha, name='pengusaha'),
     # path('data', data, name='data'),
     # path('denda', denda, name='denda'),

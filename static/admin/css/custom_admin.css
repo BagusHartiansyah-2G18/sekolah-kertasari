@@ -1,0 +1,83 @@
+/* 🔥 BATASI LEBAR KOLOM */
+
+th.column-kategori, td.field-kategori {
+    width: 120px;
+}
+
+th.column-judul, td.field-judul {
+    width: 200px;
+}
+
+th.column-keterangan, td.field-keterangan {
+    width: 400px;
+}
+
+/* 🔥 BIAR TEXTAREA GA NGACO */
+td.field-keterangan textarea {
+    width: 100%;
+    max-width: 400px;
+    min-height: 60px;
+    resize: vertical;
+}
+
+/* 🔥 KOLOM AKSI BIAR GA KEGESER */
+th.column-aksi_update, td.field-aksi_update {
+    width: 120px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 🔥 BUTTON BIAR RAPI */
+td.field-aksi_update a {
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+/* 🔥 FIX TABLE AGAR STABIL */
+#result_list {
+    table-layout: fixed;
+    width: 100%;
+}
+
+/* 🔥 KOLOM KATEGORI */
+th.column-kategori, td.field-kategori {
+    width: 120px;
+}
+
+/* 🔥 KOLOM JUDUL */
+th.column-judul, td.field-judul {
+    width: 180px;
+}
+
+/* 🔥 KOLOM KETERANGAN (UTAMA) */
+th.column-keterangan, td.field-keterangan {
+    width: 350px;
+}
+
+/* 🔥 TEXTAREA */
+td.field-keterangan textarea {
+    width: 100%;
+    max-width: 100%;
+    min-height: 60px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+/* 🔥 PREVIEW GAMBAR */
+th.column-preview_gambar, td.field-preview_gambar {
+    width: 120px;
+    text-align: center;
+}
+
+/* 🔥 KOLOM AKSI (INI PENTING) */
+th.column-aksi_update, td.field-aksi_update {
+    width: 130px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 🔥 BUTTON BIAR GA PECAH */
+td.field-aksi_update a {
+    display: inline-block;
+    white-space: nowrap;
+}

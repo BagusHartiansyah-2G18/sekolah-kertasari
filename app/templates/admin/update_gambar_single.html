@@ -1,0 +1,52 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<div style="max-width:600px; margin:auto;">
+
+  <!-- 🔥 TITLE -->
+  <h2 style="margin-bottom:20px;">
+    {{ title }}: <span style="color:#6A8F6B;">{{ obj.judul }}</span>
+  </h2>
+
+  <!-- 🔥 PREVIEW GAMBAR -->
+  {% if obj.gambar %}
+    <div style="margin-bottom:20px;">
+      <p style="margin-bottom:8px; font-weight:600;">Gambar Saat Ini:</p>
+      <img 
+        src="{{ obj.gambar.url }}" 
+        style="max-width:100%; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);"
+      >
+    </div>
+  {% endif %}
+
+  <!-- 🔥 FORM -->
+  <form method="post" enctype="multipart/form-data" 
+        style="background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.05); color: black;">
+    
+    {% csrf_token %}
+
+    <div style="margin-bottom:15px;">
+      <label style="display:block; font-weight:600; margin-bottom:6px;">
+        Upload Gambar Baru
+      </label>
+      {{ form.gambar }}
+    </div>
+
+    <button type="submit" class="default" 
+            style="background:#6A8F6B; border:none;">
+      💾 Update Gambar
+    </button>
+
+  </form>
+
+  <!-- 🔙 BACK -->
+  <div style="margin-top:20px;">
+    <a href="../../" style="text-decoration:none; color:#555;">
+      ← Kembali ke daftar
+    </a>
+  </div>
+
+</div>
+
+{% endblock %}

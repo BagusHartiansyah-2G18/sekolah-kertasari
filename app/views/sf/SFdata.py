@@ -1,190 +1,90 @@
-from app.models import TransaksiPajak
-
+from app.models import Informasi
 import pandas as pd
-
-import re
-from collections import defaultdict
+from deep_translator import GoogleTranslator
 
 import json
 
-
-NORMALISASI_KECAMATAN = {
-    "taliwang": ["taliwang", "tallingwang", "talingwang", "tliwang", "liwang"],
-    "brang rea": ["brang rea", "brangrea", "brang re’a", "brang re'a", "brang re", "brangre"],
-    "brang ene": ["brang ene", "brangene", "brang ene’", "brang ene'", "brangeneh"],
-    "jereweh": ["jereweh", "jeroeh", "jreweh", "jerewe", "jerweh"],
-    "maluk": ["maluk", "meluk", "malok", "maluak"],
-    "seteluk": ["seteluk", "steluk", "sateluk", "setlk"],
-    "poto tano": ["poto tano", "pototano", "poto-tano", "poto tanno", "pt tano"],
-    "sekongkang": ["sekongkang"]
-}
-
-MAP_EJAAN = {}
-for kecamatan, variants in NORMALISASI_KECAMATAN.items():
-    for v in variants:
-        MAP_EJAAN[v.lower()] = kecamatan.title()
-
-
-def normalisasi_kecamatan(raw_name: str) -> str:
-    """Normalisasi nama kecamatan dari string acak."""
-    if not raw_name:
-        return ""
-
-    raw = raw_name.lower().strip()
-
-    # Cocokkan langsung berdasarkan variant
-    for salah, benar in MAP_EJAAN.items():
-        if salah in raw:
-            return benar
-
-    return raw_name.title()  # fallback
-    
 def dataFrameToJson(df):
     data_json = df.to_dict(orient='records')  # list of dicts
     return json.dumps(data_json) 
 
+# Dinformasi(kategori=['tagline', 'alamat'])
+# qs = qs.filter(kategori='tagline', judul='judul tertentu')
 
+class Dinformasi:
+    def __init__(self, kategori=None):
+        # ambil data
+        qs = Informasi.objects.all()
+        if kategori:
+            qs = qs.filter(kategori=kategori)
 
-
-class Dtransaksi:
-    def __init__(self):
-        data = TransaksiPajak.objects.all()
-        if not data.exists():
-            self.dt = pd.DataFrame()  # atau bisa set ke None, tergantung kebutuhan
+        if not qs.exists():
+            self.dt = pd.DataFrame()
         else:
-            df = pd.DataFrame({'data': data}) 
-            df['data_dict'] = df['data'].apply(lambda x: x.__dict__ if x is not None else {})
-            self.dt = pd.json_normalize(df['data_dict'])
-            self.dt['tgl_bayar'] = pd.to_datetime(self.dt['tgl_bayar'], errors='coerce') 
-            self.dt['periode'] = self.dt['tgl_bayar'].dt.to_period('M')
+            self.dt = pd.DataFrame(qs.values(
+                'id', 'judul', 'keterangan', 'kategori','gambar'
+            ))
+
+            # convert tanggal
+            # if 'tgl_bayar' in self.dt.columns:
+            #     self.dt['tgl_bayar'] = pd.to_datetime(self.dt['tgl_bayar'], errors='coerce')
+            #     self.dt['periode'] = self.dt['tgl_bayar'].dt.to_period('M')
+
+            # 🔥 translate (aman)
+            # self.dt['judulE'] = self.dt['judul'].apply(self.translate_to_english)
+            # self.dt['keteranganE'] = self.dt['keterangan'].apply(self.translate_to_english)
+
+    # 🔥 fungsi translate (fix)
+    def translate_to_english(self, text):
+        try:
+            if not text:
+                return ""
+            return GoogleTranslator(source='en', target='id').translate(text)
+        except:
+            return text  # fallback kalau error
+
+    def get_by_kategori(self, kategori):
+        return self.dt[self.dt['kategori'] == kategori]
         
-    def periode(self):
-        return self.dt['periode'].drop_duplicates()
-    def jenisPAD(self):
-        return (
-            self.dt.groupby('subjenispajak_id').agg({
-                'transaksi_jmlhbayardenda': 'sum',
-                'objek_nama': 'first',
-                'objek_alamat': 'first',
-                'pengguna_nama':'first',
-                'subjenispajak_nama':'first' 
-            }).reset_index()
-            .rename(columns={'transaksi_jmlhbayardenda': 'pajak','subjenispajak_nama':'jenis'})
-        )
-    def filterByPeriode(periode):
-        # '2025-10'
-        return self.dt[self.dt['periode'] == periode]
+        # return Informasi.objects.filter(kategori=kategori).values(
+        #     'id', 'judul', 'kategori', 'keterangan','gambar'
+        # )
+    # def images(self):
+    #     return  self.dt[self.dt['gambar'] !='']
+    def images(self):
+        kategori=['brandcontent', 'program']
+        judul=None
+        qs = Informasi.objects.all()
 
-    def pengusaha(self):
-        # return self.dt.groupby('objek_id')['pajak'].sum().reset_index()
-        return (
-            self.dt.groupby('objek_id').agg({
-                'transaksi_jmlhbayardenda': 'sum',
-                'objek_nama': 'first',
-                'objek_alamat': 'first',
-                'pengguna_nama':'first',
-                'subjenispajak_nama':'first'
-            })
-            .reset_index()
-            .rename(columns={'transaksi_jmlhbayardenda': 'pajak'})
-        )
+        # 🔥 filter kategori
+        if kategori:
+            if isinstance(kategori, str):
+                kategori = [k.strip() for k in kategori.split(',')]
+            qs = qs.filter(kategori__in=kategori)
 
-        # grouped = self.dt.groupby('objek_id')['pajak'].sum().reset_index()
-        # objek_info = self.dt[['objek_id']].drop_duplicates()
-        # return pd.merge(grouped, objek_info, on='objek_id', how='left')
-        
-    def pengusahaBerdenda(self):
-        # peruser = self.dt.groupby('objek_id')['berdenda'].sum().reset_index()
-        return (
-            self.dt[self.dt['transaksi_jmlhdendapembayaran'] > 0]
-            .groupby('objek_id')
-            .agg({
-                'transaksi_jmlhdendapembayaran': 'count',
-                'objek_nama': 'first',
-                'objek_alamat': 'first',
-                'pengguna_nama': 'first',
-            })
-            .reset_index()
-            .rename(columns={'transaksi_jmlhdendapembayaran': 'transaksi_jmlhbayardenda'})
-        )
-    
-    def totalPajak(self):
-        return self.dt['pajak'].sum()
-    def totalOmzet(self):
-        return (self.dt['omzet_makanan'].fillna(0) + self.dt['omzet_minuman'].fillna(0)).sum()
+        # 🔥 filter judul
+        if judul:
+            qs = qs.filter(judul=judul)
 
-    def dataUpdate(self):
-        last_update = self.dt.sort_values('tgl_bayar', ascending=False).head(1)
-        return (
-            last_update.iloc[0]['tgl_bayar'].strftime('%d %b %Y %H:%M')
-            if not last_update.empty and pd.notnull(last_update.iloc[0]['tgl_bayar'])
-            else "-"
-        )
-    def count(self):
-        return len(self.dt)
-    
-    def daftarPajakPerbulan(self):
-        hasil = self.dt.groupby('periode').agg({
-            'pajak': 'sum',
-            'transaksi_jmlhdendapembayaran': 'sum',
-            'id': 'count'
-        }).reset_index()
-        hasil.rename(columns={
-            'transaksi_jmlhdendapembayaran': 'denda',
-            'id': 'jumlah_data'
-        }, inplace=True)
+        data = list(qs.values(
+            'id', 'judul', 'keterangan', 'kategori', 'gambar'
+        ))
 
-        berdenda = self.dt
-        berdenda['berdenda']=berdenda['transaksi_jmlhdendapembayaran'] > 0
-        jumlah_berdenda = berdenda.groupby('periode')['berdenda'].sum().reset_index()
-        hasil = hasil.merge(jumlah_berdenda, on='periode')
-        hasil.rename(columns={'berdenda': 'jumlah_berdenda'}, inplace=True)
-        return hasil
+        return pd.DataFrame(data)
 
-    def groupBykecamatan(self):
-        hasil = defaultdict(lambda: {"total_objek": 0, "total_pajak": 0,"data": []})
+    def get_df(self):
+        return self.dt
 
-        data = (
-            self.dt.groupby('objek_id').agg({
-                'transaksi_jmlhbayardenda': 'sum',
-                'id': 'count',
-                'objek_alamat':'first'
-            }).reset_index()
-            .rename(columns={'transaksi_jmlhbayardenda': 'pajak','id':'ttransaksi'})
-        )
-
-        for _, item in data.iterrows():
-            alamat = item.get("objek_alamat", "")
-            pajak = item.get("pajak", 0)
-            kecamatan = ""
-
-            # Ekstrak kecamatan via regex
-            for bagian in alamat.split(","):
-                bagian = bagian.strip().lower()
-                match = re.search(r"(?:kecamatan|kec)\s+([a-zA-Z\s]+)", bagian, re.IGNORECASE)
-                if match:
-                    kecamatan = match.group(1).strip()
-                    break
-
-            # Normalisasi kecamatan
-            kecamatan = normalisasi_kecamatan(kecamatan)
-
-            if kecamatan:
-                hasil[kecamatan]["total_objek"] += 1
-                hasil[kecamatan]["total_pajak"] += pajak
-                hasil[kecamatan]["data"].append(item.to_dict())
-
-        return pd.DataFrame([
-            {
-                "periode": kec,
-                "total_objek": val["total_objek"],
-                "total_pajak": val["total_pajak"]
-            }
-            for kec, val in dict(hasil).items()
-        ])
-     
-    def delAllTransaksi(self):
-        TransaksiPajak.objects.all().delete()
-    def belumBayar(self):
-        return self.dt[self.dt['status_bayar'].fillna(False) == False]
-
+    def to_json(self):
+        if self.dt.empty:
+            return []
+        return self.dt.to_dict(orient='records')
+    def updKategori(self,id,kategori):
+        data = Informasi.objects.get(id=id)
+        data.kategori = kategori
+        # data.judul = "Judul Baru"
+        # data.keterangan = "Deskripsi baru"
+        data.save() 
+        # Informasi.objects.filter(kategori='faq').update(
+        #     keterangan="FAQ sudah diperbarui"
+        # )
